@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url('fonts/icomoon.eot?144esw');
+    src: url('fonts/icomoon.eot?144esw#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?144esw') format('truetype'),
+        url('fonts/icomoon.woff?144esw') format('woff'),
+        url('fonts/icomoon.svg?144esw#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+
+
+
+
+.icon-pencil:before {
+    content: "\e905";
+}
+
+
+.icon-bin2:before {
+    content: "\e9ad";
+}
