@@ -1,30 +1,73 @@
-"use strict";
-
-fetchApi();
-
 //Getting the data
+
 window.onload = () => { //run the script when the page is loaded
-    async function runTest() { //function fecth data from my api
-        const resp = await fetch('')
-        const data = await resp.json(); // getting data and waiting until that syn function is finished --> response
+    console.log('Loaded');
+    const insertForm = document.getElementById("upload");
 
-        document.getElementById('list').innerText = JSON.stringify(data);
-        console.log(data);
+    function createChallenge(event) {
+        let idChallenge = document.getElementById('id').value;
+        let nameChallenge = document.getElementById('name').value;
+        let pointsChallenge = document.getElementById('points').value;
+        let courseChallenge = document.getElementById('course').value;
+        let sessionChallenge = document.getElementById('session').value;
+
+
+
+
+
+        //valid data --> transfrom to a jsonfile --> send it back to the frontend
+        //fetch heruko api 
+
+        fetch('http://10.3.205.11:3000/challenges', {
+            method: "POST",
+            body: JSON.stringify({
+                //id: idChallenge,
+                name: nameChallenge,
+                course: courseChallenge,
+                points: pointsChallenge,
+                //session: sessionChallenge
+            })
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            console.log(data)
+        }).catch(error => {
+            console.log(error)
+        })
+
     }
-    runTest();
-}
-//valid data --> transfrom to a jsonfile --> send it back to the frontend
 
-//fetch heruko api 
-function fetchApi (){
+    insertForm.addEventListener('submit', event => {
+        event.preventDefault();
 
-    fetch(`https://backend-team-amina.herokuapp.com/challenges`)
-        .then(response => {
-            return response.json
-        })
-        .then(data => {
-            console.log(data);
-        }).then(res =>{
-            console.log(response)
-        })
+        createChallenge(event);
+    })
+
+    let allChallenges = document.getElementById("seeAllChallenges");
+    allChallenges.addEventListener('click', e => {
+        e.preventDefault();
+        let insertdata = ""
+
+        fetch('http://10.3.205.11:3000/challenges')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                let insertdata = "";
+                data.forEach(data => {
+                    insertdata += `<p>
+                - ${data.name} 
+                - ${data.course} 
+                - ${data.points}
+                - ${data._id}</p>`
+                });
+                document.getElementById("input").innerHTML = insertdata;
+            })
+
+
+    })
 }
+
+//course: "the course this challenge belongs to"
+//name: "this is the name of the challenge"
+// points:: 10
+// _id: "61a5e59ae914551c72ef204b"
