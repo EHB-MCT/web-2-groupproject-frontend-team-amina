@@ -1,5 +1,16 @@
 //Getting the data
 
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000
+
+app.use(express.static('public'))
+
+
+app.get('/', (req, res, next) => {
+    res.status(200).send('index.html');
+})
+
 window.onload = () => { //run the script when the page is loaded
     console.log('Loaded');
     const insertForm = document.getElementById("upload");

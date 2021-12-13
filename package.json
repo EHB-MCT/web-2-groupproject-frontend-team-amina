@@ -1,8 +1,9 @@
 {
   "dependencies": {
+    "express": "^4.17.1",
     "node": "^17.2.0"
   },
   "scripts": {
-    "start": "npm index.html"
+    "start": "npm index.js"
   }
 }
