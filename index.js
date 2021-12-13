@@ -11,9 +11,14 @@ app.get('/', (req, res, next) => {
     res.status(200).redirect('index.html');
 })
 
-window.onload = () => { //run the script when the page is loaded
-    console.log('Loaded');
-    const insertForm = document.getElementById("upload");
+app.listen(port, () => {
+    console.log(`API running at http://localhost:${port}`)
+  })
+const insertForm = document.getElementById("upload");
+
+insertForm.addEventListener('submit',(event) =>  { //run the script when the page is loaded
+    event.preventDefault();
+    
 
     function createChallenge(event) {
         let idChallenge = document.getElementById('id').value;
@@ -46,35 +51,30 @@ window.onload = () => { //run the script when the page is loaded
 
     }
 
-    insertForm.addEventListener('submit', event => {
-        event.preventDefault();
+});
 
-        createChallenge(event);
-    })
 
-    let allChallenges = document.getElementById("seeAllChallenges");
-    allChallenges.addEventListener('click', e => {
-        e.preventDefault();
-        let insertdata = ""
-
-        fetch('https://backend-team-amina.herokuapp.com/challenges')
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                let insertdata = "";
-                data.forEach(data => {
-                    insertdata += `<p>
+let allChallenges = document.getElementById("seeAllChallenges");
+allChallenges.addEventListener('click', e => {
+    e.preventDefault();
+    let insertdata = ""
+     fetch('https://backend-team-amina.herokuapp.com/challenges')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        let insertdata = "";
+        data.forEach(data => {
+            insertdata += `<p>
                 - ${data.name} 
                 - ${data.course} 
                 - ${data.points}
                 - ${data._id}</p>`
-                });
-                document.getElementById("input").innerHTML = insertdata;
+        });
+        document.getElementById("input").innerHTML = insertdata;
             })
 
 
     })
-}
 
 //course: "the course this challenge belongs to"
 //name: "this is the name of the challenge"
