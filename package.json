@@ -4,6 +4,6 @@
     "node": "^17.2.0"
   },
   "scripts": {
-    "start": "npm index.js"
+    "start": "nodemon index.js"
   }
 }
