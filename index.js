@@ -14,25 +14,23 @@ window.onload = () => { //run the script when the page is loaded
 
 
 
-
         //valid data --> transfrom to a jsonfile --> send it back to the frontend
         //fetch heruko api 
 
-        fetch('http://10.3.205.11:3000/challenges', {
+        fetch('https://backend-team-amina.herokuapp.com/challenges', {
             method: "POST",
+            headers:{
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
-                //id: idChallenge,
-                name: nameChallenge,
-                course: courseChallenge,
-                points: pointsChallenge,
-                //session: sessionChallenge
+                "name" : nameChallenge,
+                "points": pointsChallenge,
+                "course": courseChallenge
             })
         }).then(response => {
             return response.json()
         }).then(data => {
             console.log(data)
-        }).catch(error => {
-            console.log(error)
         })
 
     }
@@ -48,7 +46,7 @@ window.onload = () => { //run the script when the page is loaded
         e.preventDefault();
         let insertdata = ""
 
-        fetch('http://10.3.205.11:3000/challenges')
+        fetch('https://backend-team-amina.herokuapp.com/challenges')
             .then(response => response.json())
             .then(data => {
                 console.log(data);
