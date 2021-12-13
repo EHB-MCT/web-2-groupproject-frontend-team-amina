@@ -8,7 +8,7 @@ app.use(express.static('public'))
 
 
 app.get('/', (req, res, next) => {
-    res.status(200).send('index.html');
+    res.status(200).redirect('index.html');
 })
 
 window.onload = () => { //run the script when the page is loaded
